@@ -1,9 +1,9 @@
-import React from 'react';
-import { render, screen } from '@testing-library/react';
-import Wordle from './App';
+import React from "react";
+import { render, screen } from "@testing-library/react";
+import Wordle from "./App";
 
-test('renders learn react link', () => {
+test("renders title", () => {
   render(<Wordle />);
-  const linkElement = screen.getByText(/learn react/i);
+  const linkElement = screen.getByText(/Wordle/i);
   expect(linkElement).toBeInTheDocument();
 });
