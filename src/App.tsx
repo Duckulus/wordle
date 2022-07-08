@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
 
-const API_URL = "/words.json";
+const API_URL = "wordle/words.json";
 const WORD_LENGTH = 5;
 const LINES = 6;
 let KNOWN_WORDS: string[];
@@ -112,7 +112,7 @@ function Line({
   return (
     <div className={"line"}>
       {tiles.map((value, i) => {
-        let color = "";
+        let color: string;
         if (value?.toUpperCase() === solution[i]) {
           color = "green";
         } else if (solution.includes(value?.toUpperCase())) {
