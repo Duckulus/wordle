@@ -35,10 +35,6 @@
     background-color: #B59F3B;
 }
 
-.gray {
-    background-color: beige;
-}
-
 .line {
     display: flex;
     gap: 5px;

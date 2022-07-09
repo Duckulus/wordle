@@ -104,26 +104,29 @@ function Line({
   solution: string;
   finished: boolean;
 }) {
-  const tiles: string[] = [];
+  const tiles: string[] = Array(WORD_LENGTH).fill("");
+  let solutionCopy = solution;
+  //The correct letters get checked first
   for (let i = 0; i < WORD_LENGTH; i++) {
-    tiles.push(word[i]);
+    if (word[i]?.toUpperCase() === solutionCopy[i]) {
+      tiles[i] = "green";
+      solutionCopy = solutionCopy.replace(word[i]?.toUpperCase(), " ");
+    }
+  }
+  //If a letter occurs more often in the word than in the solution, it will be only marked as many times as it occurs in the solution
+  for (let i = 0; i < WORD_LENGTH; i++) {
+    if (solutionCopy.includes(word[i]?.toUpperCase())) {
+      tiles[i] = "orange";
+      solutionCopy = solutionCopy.replace(word[i]?.toUpperCase(), " ");
+    }
   }
 
   return (
     <div className={"line"}>
       {tiles.map((value, i) => {
-        let color: string;
-        if (value?.toUpperCase() === solution[i]) {
-          color = "green";
-        } else if (solution.includes(value?.toUpperCase())) {
-          color = "orange";
-        } else {
-          color = "white";
-        }
-
         return (
-          <div key={i} className={`tile ${finished && color}`}>
-            {value}
+          <div key={i} className={`tile ${finished ? tiles[i] : ""}`}>
+            {word[i]}
           </div>
         );
       })}
