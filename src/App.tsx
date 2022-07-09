@@ -13,6 +13,10 @@ function Wordle() {
   const [ended, setEnded] = useState(false);
   const [hint, setHint] = useState("");
 
+  (window as any).solution = () => {
+    return solution;
+  };
+
   useEffect(() => {
     const fetchWords = async () => {
       const resp = await fetch(API_URL);
