@@ -43,3 +43,11 @@
 .hint {
     font-size: 15px;
 }
+
+.mobile-input {
+    width: 250px;
+    border: solid black 1px;
+    height: 30px ;
+    border-radius: 3px;
+    box-shadow: black;
+}

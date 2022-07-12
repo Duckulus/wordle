@@ -45,7 +45,7 @@ function Wordle() {
           .includes(event.code.toLowerCase())
       ) {
         if (currentWord.length < WORD_LENGTH)
-          setCurrentWord(currentWord + event.key);
+          setCurrentWord(currentWord + event.key.toUpperCase());
       } else if (event.key === "Enter") {
         if (currentWord.length === WORD_LENGTH) {
           if (!KNOWN_WORDS.includes(currentWord.toUpperCase())) {
@@ -79,6 +79,8 @@ function Wordle() {
     return () => window.removeEventListener("keydown", handleKeyDown);
   });
 
+  const isMobile = navigator.userAgent.toLowerCase().match(/mobile/i);
+
   return (
     <div className="board">
       <h1 className={"title"}>Wordle</h1>
@@ -94,6 +96,20 @@ function Wordle() {
           />
         );
       })}
+      <input
+        className={"mobile-input"}
+        hidden={!isMobile}
+        type={"text"}
+        placeholder={"Enter Word Here"}
+        onChange={(event) => {
+          event.preventDefault();
+          if (event.target.value.length <= WORD_LENGTH) {
+            setCurrentWord(event.target.value);
+            return;
+          }
+        }}
+        value={currentWord}
+      />
       <p className={"hint"}>{hint}</p>
     </div>
   );
